@@ -7,7 +7,7 @@
     let status = '';
   
     const SERVICE_ID = 'service_jkq5b3u';
-    const TEMPLATE_ID = 'template_pkf9tia';
+    const TEMPLATE_ID = 'template_i9ke89m';
     const PUBLIC_KEY = 'Rck1sjqBH0dNeF-aW';
   
     const sendEmail = async () => {
@@ -34,8 +34,8 @@
   
   <div class="contact-container">
     <h1>Connect with us!</h1>
-    <h2>Instagram: link</h2>
-    <h2><a href="https://campusgroups.rit.edu/cct" target="_blank" rel="noopener noreferrer">CampusGroups</a></h2>
+    <h2>Instagram: https://www.instagram.com/officialritskiteam/</h2>
+    <h2><a href="https://campusgroups.rit.edu/AlpineSki" target="_blank" rel="noopener noreferrer">CampusGroups</a></h2>
     <h2>📧 Feel free to reach out here!</h2>
     <input type="text" placeholder="Name (optional)" bind:value={name} />
     <input type="email" placeholder="Contact (optional)" bind:value={email} />
