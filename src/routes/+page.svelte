@@ -15,6 +15,21 @@
   let total = images.length;
 
   const showScrollHint = writable(true);
+  const showCopiedNotification = writable(false);
+  /**
+     * @type {number | undefined}
+     */
+  let notificationTimeout;
+
+  // E-Board members data
+  const eboardMembers = [
+    { position: "President", name: "Emereson Ostrander", email: "eeo7010@rit.edu" },
+    { position: "Vice President", name: "Jack Smith", email: "jas3139@rit.edu" },
+    { position: "Treasurer", name: "Emma Duprey", email: "ead8357@rit.edu" },
+    { position: "Treasurer", name: "Finn Sheridan-Crane", email: "fms7124@rit.edu" },
+    { position: "Secretary", name: "Ryan Tagen", email: "rst4035@rit.edu" },
+    { position: "Public Relations", name: "Julia Kress", email: "jek5095@rit.edu" }
+  ];
 
   function handleScroll() {
     const scrollPosition = window.scrollY + window.innerHeight;
@@ -24,6 +39,19 @@
       showScrollHint.set(false);
     } else {
       showScrollHint.set(true);
+    }
+  }
+
+  async function copyPassword() {
+    try {
+      await navigator.clipboard.writeText(password);
+      if (notificationTimeout) clearTimeout(notificationTimeout);
+      showCopiedNotification.set(true);
+      notificationTimeout = setTimeout(() => {
+        showCopiedNotification.set(false);
+      }, 2000);
+    } catch (err) {
+      // Fail silently
     }
   }
 
@@ -37,18 +65,14 @@
     return () => {
       clearInterval(interval);
       window.removeEventListener('scroll', handleScroll);
+      if (notificationTimeout) clearTimeout(notificationTimeout);
     };
   });
 
   let qrCodeSrc = "/qr-code.png";
   const password = "alpine24";
-
-  function copyPassword() {
-    navigator.clipboard.writeText(password).catch(() => {});
-  }
 </script>
 
-<!-- svelte-ignore css_unused_selector -->
 <style>
   body, html {
     margin: 0;
@@ -92,15 +116,12 @@
       0 0 16px #a3c4f355;
   }
 
-  /* Make content container a flex container with stretch alignment */
   .content-container {
     width: 1000px;
     max-width: 95vw;
     display: flex;
     gap: 2rem;
     margin-bottom: 3rem;
-
-    /* add this so children stretch equally in height */
     align-items: stretch;
   }
 
@@ -109,8 +130,6 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-
-    /* Make left-column stretch children */
     justify-content: flex-start;
   }
 
@@ -140,15 +159,12 @@
     z-index: 1;
   }
 
-  /* Stretch logo box to fill the height of about-us */
   .logo-box {
     border-radius: 25px;
     overflow: hidden;
     border: 4px solid #5a6f54;
     box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
     background: #f9fbf9;
-
-    /* Stretch to fill height */
     flex-grow: 1;
     height: auto;
     display: flex;
@@ -175,6 +191,58 @@
     user-select: text;
     overflow-y: auto;
     min-height: 600px;
+  }
+
+  /* E-Board Section Styles */
+  .eboard-container {
+    width: 1000px;
+    max-width: 95vw;
+    background: linear-gradient(135deg, #e6f0e8, #cde3f7);
+    border: 4px solid #5a6f54;
+    border-radius: 25px;
+    padding: 2rem;
+    box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
+    margin-bottom: 3rem;
+    color: #213544;
+  }
+
+  .eboard-container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #264d40;
+    text-shadow: 0 0 5px #a3c4f3bb;
+  }
+
+  .eboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .eboard-member {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1.2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .eboard-position {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #264d40;
+    margin-bottom: 0.5rem;
+  }
+
+  .eboard-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .eboard-email {
+    font-size: 1rem;
+    color: #3b6e47;
+    word-break: break-all;
   }
 
   .signup-box {
@@ -219,6 +287,38 @@
     color: #264d40;
     box-shadow: 0 0 20px 6px #ffffffcc;
     outline: none;
+  }
+
+  .password-container {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: #d9f0ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    user-select: text;
+    position: relative;
+  }
+
+  .copy-notification {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .copy-notification.show {
+    opacity: 1;
   }
 
   .qr-container {
@@ -315,6 +415,20 @@
     </section>
   </div>
 
+  <!-- E-Board Section -->
+  <div class="eboard-container" role="region" aria-labelledby="eboard-heading">
+    <h2 id="eboard-heading">Meet Our Ski-Board</h2>
+    <div class="eboard-grid">
+      {#each eboardMembers as member}
+        <div class="eboard-member">
+          <div class="eboard-position">{member.position}</div>
+          <div class="eboard-name">{member.name}</div>
+          <div class="eboard-email">{member.email}</div>
+        </div>
+      {/each}
+    </div>
+  </div>
+
   <div class="signup-box" role="region" aria-labelledby="signup-heading">
     <h1 id="signup-heading">Ready to ski?</h1>
     <a
@@ -326,7 +440,7 @@
       Sign Up Here
     </a>
 
-    <div style="margin-top: 1rem; font-size: 1.1rem; color: #d9f0ff; display: flex; align-items: center; justify-content: center; gap: 0.75rem; user-select: text;">
+    <div class="password-container">
       <span><strong>Password:</strong> alpine24</span>
       <!-- svelte-ignore a11y_mouse_events_have_key_events -->
       <button
@@ -365,6 +479,11 @@
           <rect x="2" y="2" width="13" height="13" rx="2" ry="2"></rect>
         </svg>
       </button>
+      {#if $showCopiedNotification}
+        <div class="copy-notification">
+          Copied to clipboard!
+        </div>
+      {/if}
     </div>
 
     <div class="qr-container" aria-label="QR code to join RIT Alpine Ski Club">
