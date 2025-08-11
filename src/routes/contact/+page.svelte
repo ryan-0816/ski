@@ -37,7 +37,7 @@
     <h2><a href="https://www.instagram.com/officialritskiteam/" target="_blank" rel="noopener noreferrer">Instagram</a></h2>
     <h2><a href="https://campusgroups.rit.edu/AlpineSki" target="_blank" rel="noopener noreferrer">CampusGroups</a></h2>
     <h2>📧 Feel free to reach out here!</h2>
-    <input type="text" placeholder="Name (optional)" bind:value={name} />
+    <input type="text" placeholder="Name (optional) a" bind:value={name} />
     <input type="email" placeholder="Contact (optional)" bind:value={email} />
     <textarea placeholder="Your message..." bind:value={message}></textarea>
     <button on:click={sendEmail}>Send! ➤📤📨⌯⌲</button>
