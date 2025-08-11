@@ -48,6 +48,7 @@
   }
 </script>
 
+<!-- svelte-ignore css_unused_selector -->
 <style>
   body, html {
     margin: 0;
@@ -296,6 +297,7 @@
       </div>
     </div>
 
+    <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
     <section class="about-us" aria-labelledby="about-heading" tabindex="0">
       <p>
         RIT Alpine Ski Club! Operating during spring semester, we have two halves: recreation and race. Recreation hosts 
@@ -306,6 +308,9 @@
         last week of winter break. This is an insane package consisting of several days of amazing skiing and very fun nights for an 
         excellent deal. If you enjoy or would like to try skiing, please reach out and see what we 
         can set up! Any level of skiing is welcomed!
+
+		<br><br><br><br><br><br>
+		Snowboarding is also allowed I suppose.
       </p>
     </section>
   </div>
@@ -323,6 +328,7 @@
 
     <div style="margin-top: 1rem; font-size: 1.1rem; color: #d9f0ff; display: flex; align-items: center; justify-content: center; gap: 0.75rem; user-select: text;">
       <span><strong>Password:</strong> alpine24</span>
+      <!-- svelte-ignore a11y_mouse_events_have_key_events -->
       <button
         on:click={copyPassword}
         style="
