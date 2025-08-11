@@ -9,6 +9,8 @@
     "/image3.jpg"
   ];
 
+  let logoImage = "/logo.jpg";
+
   let current = 0;
   let total = images.length;
 
@@ -39,18 +41,13 @@
   });
 
   let qrCodeSrc = "/qr-code.png";
-
-  // Password and copy function
   const password = "alpine24";
 
   function copyPassword() {
-    navigator.clipboard.writeText(password).catch(() => {
-      // Fail silently — no alert, no interruption
-    });
+    navigator.clipboard.writeText(password).catch(() => {});
   }
 </script>
 
-<!-- svelte-ignore css_unused_selector -->
 <style>
   body, html {
     margin: 0;
@@ -94,18 +91,29 @@
       0 0 16px #a3c4f355;
   }
 
-  .carousel-about-wrapper {
+  /* Make content container a flex container with stretch alignment */
+  .content-container {
     width: 1000px;
     max-width: 95vw;
     display: flex;
     gap: 2rem;
-    align-items: stretch;
     margin-bottom: 3rem;
-    box-sizing: border-box;
+
+    /* add this so children stretch equally in height */
+    align-items: stretch;
+  }
+
+  .left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    /* Make left-column stretch children */
+    justify-content: flex-start;
   }
 
   .carousel {
-    flex: 1;
     height: 380px;
     border-radius: 25px;
     overflow: hidden;
@@ -131,6 +139,28 @@
     z-index: 1;
   }
 
+  /* Stretch logo box to fill the height of about-us */
+  .logo-box {
+    border-radius: 25px;
+    overflow: hidden;
+    border: 4px solid #5a6f54;
+    box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
+    background: #f9fbf9;
+
+    /* Stretch to fill height */
+    flex-grow: 1;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
   .about-us {
     flex: 1;
     background: linear-gradient(135deg, #cde3f7, #a0b8d9);
@@ -143,8 +173,7 @@
     line-height: 1.6;
     user-select: text;
     overflow-y: auto;
-    min-height: 380px;
-    box-sizing: border-box;
+    min-height: 600px;
   }
 
   .signup-box {
@@ -205,7 +234,6 @@
     display: block;
   }
 
-  /* Scroll hint black style */
   .scroll-hint {
     position: fixed;
     bottom: 20px;
@@ -256,17 +284,21 @@
     <h1>Welcome to RIT Alpine Ski Club!</h1>
   </div>
 
-  <div class="carousel-about-wrapper">
-    <div class="carousel" aria-label="Ski Club photo carousel">
-      {#each images as src, i}
-        <img src={src} alt={`Ski Club image ${i + 1}`} class={i === current ? 'active' : ''} />
-      {/each}
+  <div class="content-container">
+    <div class="left-column">
+      <div class="carousel" aria-label="Ski Club photo carousel">
+        {#each images as src, i}
+          <img src={src} alt={`Ski Club image ${i + 1}`} class={i === current ? 'active' : ''} />
+        {/each}
+      </div>
+      <div class="logo-box" aria-label="Club logo">
+        <img src={logoImage} alt="RIT Alpine Ski Club logo" />
+      </div>
     </div>
 
-    <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
     <section class="about-us" aria-labelledby="about-heading" tabindex="0">
       <p>
-        RIT Alpine Ski Club! Operating during the winter, we have two halves: recreation and race. Recreation hosts 
+        RIT Alpine Ski Club! Operating during spring semester, we have two halves: recreation and race. Recreation hosts 
         trips locally, such as to Swain Resort or Bristol Mountain, on a weekly basis. Joining the team gets you access
         to those group discounts, carpool/transportation, and other things. The race team competes against nearby colleges
         in both slalom and giant slalom, frequenting resorts such as Labrador Mountain, Greek Peak, Bristol Resort, and West 
@@ -289,10 +321,8 @@
       Sign Up Here
     </a>
 
-    <!-- New password + copy button -->
     <div style="margin-top: 1rem; font-size: 1.1rem; color: #d9f0ff; display: flex; align-items: center; justify-content: center; gap: 0.75rem; user-select: text;">
       <span><strong>Password:</strong> alpine24</span>
-      <!-- svelte-ignore a11y_mouse_events_have_key_events -->
       <button
         on:click={copyPassword}
         style="
