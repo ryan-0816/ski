@@ -1,8 +1,8 @@
 <script lang="ts">
   // List your forms here with display name and file URL
   const forms = [
-    { name: "Form 1", url: "/forms/membership.pdf" },
-    { name: "Form 2", url: "/forms/event-registration.pdf" },
+    { name: "Safety Waiver", url: "/forms/membership.pdf" },
+    { name: "Academic Eligibility", url: "/forms/event-registration.pdf" },
     { name: "Form 3", url: "/forms/liability-waiver.pdf" },
     { name: "Form 4", url: "/forms/volunteer-signup.pdf" },
     { name: "Form 5", url: "/forms/feedback.pdf" },

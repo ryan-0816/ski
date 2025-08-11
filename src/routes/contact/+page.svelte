@@ -34,10 +34,57 @@
   
   <div class="contact-container">
     <h1>Connect with us!</h1>
-    <h2><a href="https://www.instagram.com/officialritskiteam/" target="_blank" rel="noopener noreferrer">Instagram</a></h2>
-    <h2><a href="https://campusgroups.rit.edu/AlpineSki" target="_blank" rel="noopener noreferrer">CampusGroups</a></h2>
+    <h2>
+  <a
+    href="https://www.instagram.com/officialritskiteam/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+  >
+    <img
+      src="/insta.jpg"
+      alt="Instagram logo"
+      style="height: 100px; width: auto;"
+    />
+  </a>
+</h2>
+
+<h2>
+  <a
+    href="https://campusgroups.rit.edu/AlpineSki"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="CampusGroups"
+  >
+    <img
+      src="/campusgroups.png"
+      alt="CampusGroups logo"
+      style="height: 100px; width: auto;"
+    />
+  </a>
+</h2>
+
+<style>
+  h2 {
+    display: inline-block;
+    margin: 0 1rem 0 0;
+  }
+
+  h2 a img {
+    vertical-align: middle;
+    height: 36px; /* adjust size */
+    width: auto;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+  }
+
+  h2 a:hover img {
+    filter: brightness(1.2);
+  }
+</style>
+
     <h2>📧 Feel free to reach out here!</h2>
-    <input type="text" placeholder="Name (optional) a" bind:value={name} />
+    <input type="text" placeholder="Name (optional)" bind:value={name} />
     <input type="email" placeholder="Contact (optional)" bind:value={email} />
     <textarea placeholder="Your message..." bind:value={message}></textarea>
     <button on:click={sendEmail}>Send! ➤📤📨⌯⌲</button>
