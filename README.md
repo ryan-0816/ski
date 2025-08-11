@@ -1,5 +1,5 @@
 # URL
-https://cct-theta.vercel.app/
+https://ski-kappa.vercel.app/
 
 # sv
 
