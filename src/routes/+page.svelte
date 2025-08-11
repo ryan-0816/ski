@@ -195,16 +195,17 @@
 
   /* E-Board Section Styles */
   .eboard-container {
-    width: 1000px;
-    max-width: 95vw;
-    background: linear-gradient(135deg, #e6f0e8, #cde3f7);
-    border: 4px solid #5a6f54;
-    border-radius: 25px;
-    padding: 2rem;
-    box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
-    margin-bottom: 3rem;
-    color: #213544;
-  }
+  width: 1000px;
+  max-width: 95vw;
+  background: linear-gradient(135deg, #e6f0e8, #cde3f7);
+  border: 4px solid #5a6f54;
+  border-radius: 25px;
+  padding: 3rem 2rem; /* match welcome-box padding */
+  box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
+  margin-bottom: 3rem;
+  color: #213544;
+  box-sizing: border-box;
+}
 
   .eboard-container h2 {
     text-align: center;
@@ -215,10 +216,12 @@
   }
 
   .eboard-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 90%; /* add this so it’s not flush against edges */
+  margin: 0 auto;  /* center it */
+}
 
   .eboard-member {
     background: rgba(255, 255, 255, 0.7);
@@ -408,9 +411,6 @@
         last week of winter break. This is an insane package consisting of several days of amazing skiing and very fun nights for an 
         excellent deal. If you enjoy or would like to try skiing, please reach out and see what we 
         can set up! Any level of skiing is welcomed!
-
-		<br><br><br><br><br><br>
-		Snowboarding is also allowed I suppose.
       </p>
     </section>
   </div>
