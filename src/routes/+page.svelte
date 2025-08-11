@@ -39,8 +39,19 @@
   });
 
   let qrCodeSrc = "/qr-code.png";
+
+  // Password and copy function
+  const password = "alpine24";
+
+  function copyPassword() {
+  navigator.clipboard.writeText(password).catch(() => {
+    // Fail silently — no alert, no interruption
+  });
+}
+
 </script>
 
+<!-- svelte-ignore css_unused_selector -->
 <style>
   body {
     margin: 0;
@@ -81,13 +92,14 @@
   }
 
   .carousel-about-wrapper {
-    display: flex;
-    gap: 3.5rem;
-    max-width: 1000px;
-    width: 95vw;
-    margin-bottom: 4rem;
-    align-items: stretch;
-  }
+  display: flex;
+  gap: 3.5rem; /* 56px */
+  max-width: 1000px;
+  width: 1000px;
+  margin-bottom: 4rem;
+  align-items: stretch;
+}
+
 
   .carousel {
     position: relative;
@@ -237,6 +249,7 @@
       {/each}
     </div>
 
+    <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
     <section class="about-us" aria-labelledby="about-heading" tabindex="0">
       <h2 id="about-heading" style="margin-top:0;">About Us</h2>
       <p>
@@ -255,6 +268,50 @@
     >
       Sign Up Here
     </a>
+
+    <!-- New password + copy button -->
+    <div style="margin-top: 1rem; font-size: 1.1rem; color: #d9f0ff; display: flex; align-items: center; justify-content: center; gap: 0.75rem; user-select: text;">
+      <span><strong>Password:</strong> alpine24</span>
+      <!-- svelte-ignore a11y_mouse_events_have_key_events -->
+      <button
+  on:click={copyPassword}
+  style="
+    background: #d9f0ff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.3rem 0.8rem;
+    font-weight: 700;
+    color: #264d40;
+    cursor: pointer;
+    box-shadow: 0 0 6px #a3c4f3cc;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  "
+  on:mouseover={e => e.currentTarget.style.backgroundColor = '#bcd8ff'}
+  on:mouseout={e => e.currentTarget.style.backgroundColor = '#d9f0ff'}
+  aria-label="Copy password alpine 24 to clipboard"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    fill="none"
+    stroke="#264d40"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+    <rect x="2" y="2" width="13" height="13" rx="2" ry="2"></rect>
+  </svg>
+</button>
+
+    </div>
+
     <div class="qr-container" aria-label="QR code to join RIT Alpine Ski Club">
       <img src={"/qrcode.jpg"} alt="QR code for RIT Alpine Ski Club signup" />
     </div>
