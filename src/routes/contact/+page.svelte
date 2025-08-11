@@ -34,7 +34,7 @@
   
   <div class="contact-container">
     <h1>Connect with us!</h1>
-    <h2>Instagram: https://www.instagram.com/officialritskiteam/</h2>
+    <h2><a href="https://www.instagram.com/officialritskiteam/" target="_blank" rel="noopener noreferrer">Instagram</a></h2>
     <h2><a href="https://campusgroups.rit.edu/AlpineSki" target="_blank" rel="noopener noreferrer">CampusGroups</a></h2>
     <h2>📧 Feel free to reach out here!</h2>
     <input type="text" placeholder="Name (optional)" bind:value={name} />
