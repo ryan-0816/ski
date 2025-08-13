@@ -31,6 +31,14 @@
     { position: "Public Relations", name: "Julia Kress", email: "jek5095@rit.edu" }
   ];
 
+  // Navigation items
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Events", path: "/events" },
+    { name: "Contact Us", path: "/contact" },
+    { name: "Forms", path: "/forms" }
+  ];
+
   function handleScroll() {
     const scrollPosition = window.scrollY + window.innerHeight;
     const fullHeight = document.documentElement.scrollHeight;
@@ -73,13 +81,75 @@
   const password = "alpine24";
 </script>
 
+<!-- svelte-ignore css_unused_selector -->
 <style>
   body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     overflow-x: hidden;
-    -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Navigation Bar Styles */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #264d40, #3b6e47);
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-container {
+    width: 1000px;
+    max-width: 95vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    height: 40px;
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-link {
+    color: #d9f0ff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: #ffffff;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #d9f0ff;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
   }
 
   main {
@@ -90,6 +160,7 @@
     width: 100%;
     max-width: 100vw;
     box-sizing: border-box;
+    margin-top: 80px; /* Adjusted for fixed navbar */
   }
 
   .welcome-box {
@@ -121,6 +192,18 @@
     .welcome-box h1 {
       font-size: 2.5rem;
       line-height: 1.2;
+    }
+
+    .nav-links {
+      gap: 1rem;
+    }
+    
+    .nav-link {
+      font-size: 1rem;
+    }
+    
+    .nav-logo {
+      height: 35px;
     }
   }
 
@@ -438,6 +521,17 @@
     50% { opacity: 0.4; transform: translateY(8px); }
   }
 </style>
+
+<nav class="navbar" aria-label="Main navigation">
+  <div class="nav-container">
+    <img src={logoImage} alt="RIT Alpine Ski Club Logo" class="nav-logo" />
+    <div class="nav-links">
+      {#each navItems as item}
+        <a href={item.path} class="nav-link">{item.name}</a>
+      {/each}
+    </div>
+  </div>
+</nav>
 
 <main>
   <div class="welcome-box" role="banner">
