@@ -49,7 +49,7 @@
       showCopiedNotification.set(true);
       notificationTimeout = setTimeout(() => {
         showCopiedNotification.set(false);
-      }, 2000);
+      }, 1500);
     } catch (err) {
       // Fail silently
     }
@@ -359,11 +359,10 @@
     bottom: -25px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
+    color: black;
     padding: 4px 8px;
     border-radius: 4px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
