@@ -4,6 +4,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </svelte:head>
 
+<script>
+    import { onMount } from 'svelte';
+    
+    let isMobile = false;
+    
+    onMount(() => {
+        // Check if mobile device
+        isMobile = window.innerWidth < 768;
+        
+        // Update on resize
+        window.addEventListener('resize', handleResize);
+        
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    });
+    
+    function handleResize() {
+        isMobile = window.innerWidth < 768;
+    }
+    
+    // Base calendar URL
+    const calendarSrc = "https://calendar.google.com/calendar/embed";
+    
+    // Calendar ID
+    const calendarId = "c_6ac1852bd4d4f0dda436ea5287d982ec447e70bdb49a2bb3c3764c7012cb1b63%40group.calendar.google.com";
+    
+    // Get the appropriate calendar URL based on device
+    $: calendarUrl = isMobile 
+        ? `${calendarSrc}?src=${calendarId}&mode=AGENDA&ctz=America%2FNew_York`
+        : `${calendarSrc}?src=${calendarId}&ctz=America%2FNew_York`;
+</script>
+
 <style>
     :global(body) {
         margin: 0;
@@ -74,7 +107,7 @@
     <div class="calendar-wrapper">
         <iframe 
             class="calendar-iframe"
-            src="https://calendar.google.com/calendar/embed?src=c_6ac1852bd4d4f0dda436ea5287d982ec447e70bdb49a2bb3c3764c7012cb1b63%40group.calendar.google.com&ctz=America%2FNew_York" 
+            src={calendarUrl}
             frameborder="0" 
             scrolling="no"
             title="Chinese Conversation Table Events Calendar"
