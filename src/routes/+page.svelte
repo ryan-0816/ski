@@ -79,13 +79,14 @@
     padding: 0;
     width: 100%;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
   }
 
   main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3rem 0 6rem;
+    padding: 2rem 0 6rem;
     width: 100%;
     max-width: 100vw;
     box-sizing: border-box;
@@ -94,13 +95,13 @@
   .welcome-box {
     background-color: #e6f0e8;
     border: 4px solid #5a6f54;
-    padding: 3rem 2rem;
+    padding: 2rem 1.5rem;
     border-radius: 25px;
     box-shadow: 0 0 30px 8px rgba(60, 130, 180, 0.5);
     text-align: center;
     width: 1000px;
     max-width: 95vw;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     box-sizing: border-box;
   }
 
@@ -116,13 +117,27 @@
       0 0 16px #a3c4f355;
   }
 
+  @media (max-width: 768px) {
+    .welcome-box h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+    }
+  }
+
   .content-container {
     width: 1000px;
     max-width: 95vw;
     display: flex;
+    flex-direction: column;
     gap: 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     align-items: stretch;
+  }
+
+  @media (min-width: 1024px) {
+    .content-container {
+      flex-direction: row;
+    }
   }
 
   .left-column {
@@ -141,6 +156,12 @@
     box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
     background: #f9fbf9;
     position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .carousel {
+      height: 250px;
+    }
   }
 
   .carousel img {
@@ -167,6 +188,7 @@
     background: #f9fbf9;
     flex-grow: 1;
     height: auto;
+    min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -176,6 +198,8 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+    padding: 1rem;
+    box-sizing: border-box;
   }
 
   .about-us {
@@ -183,45 +207,64 @@
     background: linear-gradient(135deg, #cde3f7, #a0b8d9);
     border: 4px solid #5a6f54;
     border-radius: 25px;
-    padding: 2rem;
+    padding: 1.5rem;
     box-shadow: 0 0 30px 6px rgba(90, 111, 84, 0.3);
     color: #213544;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     line-height: 1.6;
     user-select: text;
     overflow-y: auto;
-    min-height: 600px;
+    min-height: auto;
+  }
+
+  @media (min-width: 768px) {
+    .about-us {
+      font-size: 1.3rem;
+      min-height: 600px;
+    }
   }
 
   /* E-Board Section Styles */
   .eboard-container {
-  width: 1000px;
-  max-width: 95vw;
-  background: linear-gradient(135deg, #e6f0e8, #cde3f7);
-  border: 4px solid #5a6f54;
-  border-radius: 25px;
-  padding: 3rem 2rem; /* match welcome-box padding */
-  box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
-  margin-bottom: 3rem;
-  color: #213544;
-  box-sizing: border-box;
-}
+    width: 1000px;
+    max-width: 95vw;
+    background: linear-gradient(135deg, #e6f0e8, #cde3f7);
+    border: 4px solid #5a6f54;
+    border-radius: 25px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
+    margin-bottom: 2rem;
+    color: #213544;
+    box-sizing: border-box;
+  }
 
   .eboard-container h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #264d40;
     text-shadow: 0 0 5px #a3c4f3bb;
   }
 
+  @media (min-width: 768px) {
+    .eboard-container h2 {
+      font-size: 2.5rem;
+    }
+  }
+
   .eboard-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
-  max-width: 90%; /* add this so it’s not flush against edges */
-  margin: 0 auto;  /* center it */
-}
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 640px) {
+    .eboard-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
 
   .eboard-member {
     background: rgba(255, 255, 255, 0.7);
@@ -230,29 +273,11 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
-  .eboard-position {
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: #264d40;
-    margin-bottom: 0.5rem;
-  }
-
-  .eboard-name {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .eboard-email {
-    font-size: 1rem;
-    color: #3b6e47;
-    word-break: break-all;
-  }
-
   .signup-box {
     background: linear-gradient(135deg, #3b6e47, #264d40);
     border-radius: 25px;
     box-shadow: 0 0 40px 10px rgba(38, 77, 64, 0.9);
-    padding: 3rem 2rem 5rem;
+    padding: 2rem 1.5rem 4rem;
     text-align: center;
     width: 1000px;
     max-width: 95vw;
@@ -263,18 +288,28 @@
   }
 
   .signup-box h1 {
-    font-size: 3.5rem;
-    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
     font-weight: 900;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     text-shadow: 0 0 10px #a3c4f3dd;
   }
 
+  @media (min-width: 768px) {
+    .signup-box h1 {
+      font-size: 3.5rem;
+      margin-bottom: 2rem;
+    }
+    .signup-box {
+      padding: 3rem 2rem 5rem;
+    }
+  }
+
   .signup-link {
     display: inline-block;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #d9f0ff;
     text-decoration: none;
     border: 3px solid #d9f0ff;
@@ -282,6 +317,13 @@
     border-radius: 18px;
     transition: background-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
     box-shadow: 0 0 12px 3px #a3c4f3aa;
+    min-width: 200px;
+  }
+
+  @media (min-width: 768px) {
+    .signup-link {
+      font-size: 1.5rem;
+    }
   }
 
   .signup-link:hover,
@@ -294,7 +336,7 @@
 
   .password-container {
     margin-top: 1rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #d9f0ff;
     display: flex;
     align-items: center;
@@ -302,6 +344,14 @@
     gap: 0.75rem;
     user-select: text;
     position: relative;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 768px) {
+    .password-container {
+      font-size: 1.1rem;
+      flex-wrap: nowrap;
+    }
   }
 
   .copy-notification {
@@ -326,10 +376,16 @@
 
   .qr-container {
     max-width: 220px;
-    margin: 3rem auto 0;
+    margin: 2rem auto 0;
     border-radius: 25px;
     box-shadow: 0 0 20px 5px #a3c4f3cc;
     overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .qr-container {
+      margin: 3rem auto 0;
+    }
   }
 
   .qr-container img {
@@ -458,6 +514,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          min-width: 44px;
+          min-height: 44px;
         "
         on:mouseover={e => e.currentTarget.style.backgroundColor = '#bcd8ff'}
         on:mouseout={e => e.currentTarget.style.backgroundColor = '#d9f0ff'}
@@ -480,7 +538,7 @@
         </svg>
       </button>
       {#if $showCopiedNotification}
-        <div class="copy-notification">
+        <div class="copy-notification show">
           Copied to clipboard!
         </div>
       {/if}
