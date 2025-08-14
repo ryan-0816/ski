@@ -21,8 +21,8 @@
       return;
     }
 
-    if (!name || !email || !message) {
-      status = "Please fill in all fields.";
+    if (!message) {
+      status = "Please write your message.";
       return;
     }
 
@@ -32,7 +32,7 @@
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
-        { from_name: name, from_email: email, message: message },
+        { from_name: name || "Anonymous", from_email: email || "no-email-provided", message: message },
         PUBLIC_KEY
       );
       status = "✅ Message sent successfully!";
