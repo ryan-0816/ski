@@ -150,9 +150,9 @@
             </a>
             
             <!-- Discord -->
-            <a href="YOUR_DISCORD_LINK_HERE"
+            <a href="https://discord.gg/HHuBQTKDwQ"
                target="_blank" rel="noopener noreferrer" aria-label="Discord">
-                <img src="YOUR_DISCORD_IMAGE_PATH_HERE" alt="Discord logo" class="social-logo discord-logo" />
+                <img src="/discord logo.jpg" alt="Discord logo" class="social-logo discord-logo" />
             </a>
         </div>
 
