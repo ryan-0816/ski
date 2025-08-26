@@ -152,7 +152,7 @@
             <!-- Discord -->
             <a href="https://discord.gg/HHuBQTKDwQ"
                target="_blank" rel="noopener noreferrer" aria-label="Discord">
-                <img src="/discord logo.jpg" alt="Discord logo" class="social-logo discord-logo" />
+                <img src="/discordlogo.jpg" alt="Discord logo" class="social-logo discord-logo" />
             </a>
         </div>
 
