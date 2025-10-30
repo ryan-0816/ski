@@ -23,7 +23,7 @@
 
   // E-Board members data
   const eboardMembers = [
-    { position: "President", name: "Emereson Ostrander", email: "eeo7010@rit.edu" },
+    { position: "President", name: "Emerson Ostrander", email: "eeo7010@rit.edu" },
     { position: "Vice President", name: "Jack Smith", email: "jas3139@rit.edu" },
     { position: "Treasurer", name: "Emma Duprey", email: "ead8357@rit.edu" },
     { position: "Treasurer", name: "Finn Sheridan-Crane", email: "fms7124@rit.edu" },
