@@ -2,24 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RIT Ski Team - Contact Us</title>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .page-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin: 1rem 0 1.5rem;
+            color: #264d40;
         }
 
         .contact-container {
             max-width: 450px;
-            margin: auto;
+            margin: 0 auto;
             padding: 2.5rem;
             background: #fff;
             border-radius: 16px;
@@ -29,12 +42,6 @@
             align-items: center;
             gap: 1.2rem;
             text-align: center;
-        }
-
-        h1 {
-            color: #2c3e50;
-            margin: 0 0 0.5rem 0;
-            font-size: 1.8rem;
         }
 
         .social-container {
@@ -130,41 +137,54 @@
             margin: 0.5rem 0 1rem 0;
             font-weight: 500;
         }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                margin: 1.5rem 0 2rem;
+            }
+
+            .page-container {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="contact-container">
+    <div class="page-container">
         <h1>Connect with us!</h1>
         
-        <div class="social-container">
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/officialritskiteam/"
-               target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <img src="/insta.jpg" alt="Instagram logo" class="social-logo instagram-logo" />
-            </a>
-            
-            <!-- CampusGroups -->
-            <a href="https://campusgroups.rit.edu/AlpineSki"
-               target="_blank" rel="noopener noreferrer" aria-label="CampusGroups">
-                <img src="/campusgroups.png" alt="CampusGroups logo" class="social-logo campusgroups-logo" />
-            </a>
-            
-            <!-- Discord -->
-            <a href="https://discord.gg/HHuBQTKDwQ"
-               target="_blank" rel="noopener noreferrer" aria-label="Discord">
-                <img src="/discordlogo.jpg" alt="Discord logo" class="social-logo discord-logo" />
-            </a>
-        </div>
+        <div class="contact-container">
+            <div class="social-container">
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/officialritskiteam/"
+                   target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <img src="/insta.jpg" alt="Instagram logo" class="social-logo instagram-logo" />
+                </a>
+                
+                <!-- CampusGroups -->
+                <a href="https://campusgroups.rit.edu/AlpineSki"
+                   target="_blank" rel="noopener noreferrer" aria-label="CampusGroups">
+                    <img src="/campusgroups.png" alt="CampusGroups logo" class="social-logo campusgroups-logo" />
+                </a>
+                
+                <!-- Discord -->
+                <a href="https://discord.gg/HHuBQTKDwQ"
+                   target="_blank" rel="noopener noreferrer" aria-label="Discord">
+                    <img src="/discordlogo.jpg" alt="Discord logo" class="social-logo discord-logo" />
+                </a>
+            </div>
 
-        <p class="subheading">📧 Feel free to reach out here!</p>
-        
-        <input type="text" placeholder="Name (optional)" id="name" />
-        <input type="email" placeholder="Contact (optional)" id="email" />
-        <textarea placeholder="Your message..." id="message"></textarea>
-        
-        <button id="send-button">Send! ➤📤📨⌯⌲</button>
-        
-        <p class="status" id="status"></p>
+            <p class="subheading">📧 Feel free to reach out here!</p>
+            
+            <input type="text" placeholder="Name (optional)" id="name" />
+            <input type="email" placeholder="Contact (optional)" id="email" />
+            <textarea placeholder="Your message..." id="message"></textarea>
+            
+            <button id="send-button">Send! ➤📤📨⌯⌲</button>
+            
+            <p class="status" id="status"></p>
+        </div>
     </div>
 
     <script>
