@@ -168,11 +168,6 @@
     </div>
 
     <script>
-        // Initialize EmailJS
-        (function() {
-            emailjs.init("Rck1sjqBH0dNeF-aW");
-        })();
-
         // Get DOM elements
         const nameInput = document.getElementById('name');
         const emailInput = document.getElementById('email');
@@ -180,25 +175,58 @@
         const sendButton = document.getElementById('send-button');
         const statusEl = document.getElementById('status');
 
-        // Email configuration
-        const SERVICE_ID = 'service_jkq5b3u';
-        const TEMPLATE_ID = 'template_i9ke89m';
-        const COOLDOWN_MS = 60000; // 60 seconds between sends
+        // Email configuration - VERIFY THESE IN YOUR EMAILJS DASHBOARD
+        const PUBLIC_KEY = 'Rck1sjqBH0dNeF-aW'; // Replace with your actual public key
+        const SERVICE_ID = 'service_jkq5b3u';    // Replace with your actual service ID
+        const TEMPLATE_ID = 'template_i9ke89m';  // Replace with your actual template ID
+        const COOLDOWN_MS = 60000;
 
         let lastSendTime = 0;
         let isSending = false;
 
+        // Initialize EmailJS with error handling
+        function initializeEmailJS() {
+            try {
+                if (typeof emailjs === 'undefined') {
+                    statusEl.textContent = "❌ EmailJS library failed to load";
+                    return false;
+                }
+                
+                emailjs.init(PUBLIC_KEY);
+                console.log("EmailJS initialized");
+                return true;
+            } catch (error) {
+                console.error("EmailJS init error:", error);
+                statusEl.textContent = "❌ EmailJS initialization failed";
+                return false;
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!initializeEmailJS()) {
+                sendButton.disabled = true;
+                sendButton.textContent = "Service Unavailable";
+            }
+        });
+
         // Send email function
         const sendEmail = async () => {
+            // Check if EmailJS is available
+            if (typeof emailjs === 'undefined') {
+                statusEl.textContent = "❌ Email service not loaded";
+                return;
+            }
+
             const now = Date.now();
             if (now - lastSendTime < COOLDOWN_MS) {
-                statusEl.textContent = `⏳ Please wait a few seconds before sending again.`;
+                statusEl.textContent = `⏳ Please wait before sending again`;
                 return;
             }
 
             const message = messageInput.value.trim();
             if (!message) {
-                statusEl.textContent = "Please write your message.";
+                statusEl.textContent = "Please write your message";
                 return;
             }
 
@@ -208,24 +236,37 @@
             statusEl.textContent = "📨 Sending...";
 
             try {
-                await emailjs.send(
-                    SERVICE_ID,
-                    TEMPLATE_ID,
-                    { 
-                        from_name: nameInput.value.trim() || "Anonymous", 
-                        from_email: emailInput.value.trim() || "no-email-provided", 
-                        message: message 
-                    }
-                );
+                const templateParams = {
+                    from_name: nameInput.value.trim() || "Anonymous",
+                    from_email: emailInput.value.trim() || "no-email-provided",
+                    message: message,
+                    reply_to: emailInput.value.trim() || "no-reply@example.com"
+                };
+
+                console.log("Sending email with params:", templateParams);
+                
+                const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
+                console.log("Email sent successfully:", response);
                 
                 statusEl.textContent = "✅ Message sent successfully!";
                 nameInput.value = '';
                 emailInput.value = '';
                 messageInput.value = '';
                 lastSendTime = now;
+
             } catch (error) {
-                console.error("Email send error:", error);
-                statusEl.textContent = "❌ Failed to send message. Try again.";
+                console.error("Email send error details:", error);
+                
+                // More specific error messages
+                if (error.status === 400) {
+                    statusEl.textContent = "❌ Invalid email configuration";
+                } else if (error.status === 401) {
+                    statusEl.textContent = "❌ Email service unauthorized";
+                } else if (error.status === 0) {
+                    statusEl.textContent = "❌ Network error - check connection";
+                } else {
+                    statusEl.textContent = "❌ Failed to send message";
+                }
             } finally {
                 isSending = false;
                 sendButton.disabled = false;
@@ -235,6 +276,14 @@
 
         // Add event listener
         sendButton.addEventListener('click', sendEmail);
+
+        // Allow Enter key to send message
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendEmail();
+            }
+        });
     </script>
 </body>
 </html>

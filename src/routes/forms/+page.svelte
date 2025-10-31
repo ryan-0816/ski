@@ -1,7 +1,7 @@
 <script lang="ts">
   // List your forms here with display name and file URL
   const forms = [
-    { name: "Safety Waiver", url: "/form1.pdf" },
+    { name: "USCSA Registration Instructions", url: "/USCSA Registration Instructions.pdf" },
     { name: "Academic Eligibility", url: "/form2.pdf" },
     { name: "Form 3", url: "/form3.pdf" },
     { name: "Form 4", url: "/form4.pdf" },
