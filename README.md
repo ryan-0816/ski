@@ -1,5 +1,5 @@
 # URL
-https://ski-kappa.vercel.app/
+https://ritskiclub.vercel.app/
 
 # sv
 
