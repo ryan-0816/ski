@@ -2,7 +2,7 @@
   // List your forms here with display name and file URL
   const forms = [
     { name: "USCSA Registration Instructions", url: "/USCSA Registration Instructions.pdf" },
-    { name: "Academic Eligibility", url: "/form2.pdf" },
+    { name: "Academic Eligibility", url: "/25-26_Individual_Academic_Eligibility_Release_Form.pdf"},
     { name: "Form 3", url: "/form3.pdf" },
     { name: "Form 4", url: "/form4.pdf" },
     { name: "Form 5", url: "/form5.pdf" },
