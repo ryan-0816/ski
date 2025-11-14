@@ -371,6 +371,7 @@
       <br>Transportation: We do our best to coordinate carpooling to the mountain. If you are in the New England area, there are good chances someone will be able to pick you up. If you are from farther, many people will meet at RIT a week early and several cars will head to the mountain from there. Bus transportation from the cabins to the mountain is included. 
       <br>Lodging: We have 5 cabins with 6 people each. We will make rooming assignments.
       <br>Food: We expect everyone to contribute equally, whether that is in cooking, buying food, or cleaning up. 
+      <br>Timeline: We want everyone to have made their payments by November 30th, as we will be hosting a details meeting on December 1st to make plans. We will be staying in the cabins from the nights of January 4th through 8th, and skiing from the 5th through 9th. Optional day passes can be purchased separately on the 4th if you arrive early.
     </p>
     <p>
       <strong>Why You Should Join:</strong> This trip offers unbeatable value, amazing skiing, and the 
