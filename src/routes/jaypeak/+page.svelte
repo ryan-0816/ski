@@ -337,8 +337,7 @@
       <br> Overall: $505, assuming rec dues.
     </p>
     <p>
-      <strong>What you get:</strong> The trip package includes multiple days of lift tickets, lodging, 
-      transportation, and access to Jay Peak's legendary glades and terrain. Whether you're racing down 
+      <strong>What you get:</strong> The trip package includes five full days of lift tickets, lodging, and access to Jay Peak's legendary glades and terrain. Whether you're racing down 
       steep chutes or exploring tree runs, Jay Peak offers something for every skill level.
     </p>
     <p>
@@ -348,6 +347,9 @@
     </p>
     <p>
       <strong>Logistics:</strong> 
+      <br>Transportation: We do our best to coordinate carpooling to the mountain. If you are in the New England area, there are good chances someone will be able to pick you up. If you are from farther, many people will meet at RIT a week early and several cars will head to the mountain from there. Bus transportation from the cabins to the mountain is included. 
+      <br>Lodging: We have 5 cabins with 6 people each. We will make rooming assignments.
+      <br>Food: We expect everyone to contribute equally, whether that is in cooking, buying food, or cleaning up. 
     </p>
     <p>
       <strong>Why You Should Join:</strong> This trip offers unbeatable value, amazing skiing, and the 
@@ -371,11 +373,11 @@
     </div>
 
     <div class="link-box">
-      <h3>Trip Slideshow</h3>
-      <p>Relive the best moments from last year's adventure</p>
+      <h3>Slideshow</h3>
+      <p>Presentation with a few of the finer details</p>
       <a
         class="link-button"
-        href="#"
+        href="https://docs.google.com/presentation/d/19RK-Tfv78vYm9NCPSv2cIm8J_HPMiijRWXeWv21kW6g/edit?usp=sharing"
         target="_blank"
         rel="noopener noreferrer"
       >
