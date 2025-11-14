@@ -115,6 +115,9 @@
 			<li aria-current={page.url.pathname === '/events' ? 'page' : undefined}>
 				<a href="/events">Events</a>
 			</li>
+			<li aria-current={page.url.pathname === '/jaypeak' ? 'page' : undefined}>
+				<a href="/jaypeak">Jay Peak</a>
+			</li>
 			<li aria-current={page.url.pathname.startsWith('/contact') ? 'page' : undefined}>
 				<a href="/contact">Contact Us</a>
 			</li>
