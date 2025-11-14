@@ -10,10 +10,7 @@
     let isMobile = false;
     
     onMount(() => {
-        // Check if mobile device
         isMobile = window.innerWidth < 768;
-        
-        // Update on resize
         window.addEventListener('resize', handleResize);
         
         return () => {
@@ -25,13 +22,9 @@
         isMobile = window.innerWidth < 768;
     }
     
-    // Base calendar URL
     const calendarSrc = "https://calendar.google.com/calendar/embed";
-    
-    // Calendar ID
     const calendarId = "c_6ac1852bd4d4f0dda436ea5287d982ec447e70bdb49a2bb3c3764c7012cb1b63%40group.calendar.google.com";
     
-    // Get the appropriate calendar URL based on device
     $: calendarUrl = isMobile 
         ? `${calendarSrc}?src=${calendarId}&mode=AGENDA&ctz=America%2FNew_York`
         : `${calendarSrc}?src=${calendarId}&ctz=America%2FNew_York`;
@@ -43,6 +36,7 @@
         padding: 0;
         width: 100%;
         overflow-x: hidden;
+        background: #e8f5e9; /* soft light green background */
         -webkit-text-size-adjust: 100%;
     }
 
@@ -65,10 +59,11 @@
         position: relative;
         width: 100%;
         height: 0;
-        padding-bottom: 100%; /* Square aspect ratio for mobile */
+        padding-bottom: 100%;
         overflow: hidden;
         border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        background: white;
     }
 
     .calendar-iframe {
@@ -87,7 +82,7 @@
         }
 
         .calendar-wrapper {
-            padding-bottom: 75%; /* 4:3 aspect ratio for desktop */
+            padding-bottom: 75%;
         }
 
         .page-container {
@@ -97,7 +92,7 @@
 
     @media (min-width: 1024px) {
         .calendar-wrapper {
-            padding-bottom: 60%; /* Wider aspect ratio for larger screens */
+            padding-bottom: 60%;
         }
     }
 </style>
@@ -108,7 +103,7 @@
         <iframe 
             class="calendar-iframe"
             src={calendarUrl}
-            frameborder="0" 
+            frameborder="0"
             scrolling="no"
             title="Chinese Conversation Table Events Calendar"
         ></iframe>

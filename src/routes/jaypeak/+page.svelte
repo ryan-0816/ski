@@ -1,116 +1,421 @@
-<svelte:head>
-    <title>Events</title>
-    <meta name="description" content="Chinese Conversation Table Events" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-</svelte:head>
-
 <script>
-    import { onMount } from 'svelte';
-    
-    let isMobile = false;
-    
-    onMount(() => {
-        // Check if mobile device
-        isMobile = window.innerWidth < 768;
-        
-        // Update on resize
-        window.addEventListener('resize', handleResize);
-        
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    });
-    
-    function handleResize() {
-        isMobile = window.innerWidth < 768;
+  import { onMount } from 'svelte';
+  import { writable } from 'svelte/store';
+
+  let tripImages = [
+    "/photo3.jpg",
+    "/photo6.JPEG",
+    "/photo1.JPG",
+    "/photo2.jpg",
+    "/photo4.jpg",
+    "/photo5.jpg"
+  ];
+
+  let current = 0;
+  let total = tripImages.length;
+
+  const showScrollHint = writable(true);
+
+  function handleScroll() {
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const fullHeight = document.documentElement.scrollHeight;
+
+    if (scrollPosition >= fullHeight - 100) {
+      showScrollHint.set(false);
+    } else {
+      showScrollHint.set(true);
     }
-    
-    // Base calendar URL
-    const calendarSrc = "https://calendar.google.com/calendar/embed";
-    
-    // Calendar ID
-    const calendarId = "c_6ac1852bd4d4f0dda436ea5287d982ec447e70bdb49a2bb3c3764c7012cb1b63%40group.calendar.google.com";
-    
-    // Get the appropriate calendar URL based on device
-    $: calendarUrl = isMobile 
-        ? `${calendarSrc}?src=${calendarId}&mode=AGENDA&ctz=America%2FNew_York`
-        : `${calendarSrc}?src=${calendarId}&ctz=America%2FNew_York`;
+  }
+
+  onMount(() => {
+    const interval = setInterval(() => {
+      current = (current + 1) % total;
+    }, 4000);
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
 </script>
 
 <style>
-    :global(body) {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        overflow-x: hidden;
-        -webkit-text-size-adjust: 100%;
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0 6rem;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .hero-box {
+    background: linear-gradient(135deg, #3b6e47, #264d40);
+    border: 4px solid #5a6f54;
+    padding: 3rem 1.5rem;
+    border-radius: 25px;
+    box-shadow: 0 0 40px 10px rgba(60, 130, 180, 0.6);
+    text-align: center;
+    width: 1000px;
+    max-width: 95vw;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+  }
+
+  .hero-box h1 {
+    margin: 0 0 0.5rem;
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #d9f0ff;
+    text-shadow:
+      0 0 10px #a3c4f3dd,
+      0 0 20px #a3c4f377;
+  }
+
+  .hero-box .subtitle {
+    font-size: 1.5rem;
+    color: #a3c4f3;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .hero-box h1 {
+      font-size: 2rem;
+      line-height: 1.2;
     }
-
-    .page-container {
-        width: 100%;
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 1rem;
-        box-sizing: border-box;
+    .hero-box .subtitle {
+      font-size: 1.1rem;
     }
+  }
 
-    h1 {
-        text-align: center;
-        font-size: 2rem;
-        margin: 1rem 0 1.5rem;
-        color: #264d40;
+  .carousel-section {
+    width: 1000px;
+    max-width: 95vw;
+    margin-bottom: 2rem;
+  }
+
+  .carousel {
+    height: 500px;
+    border-radius: 25px;
+    overflow: hidden;
+    border: 4px solid #5a6f54;
+    box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
+    background: #f9fbf9;
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .carousel {
+      height: 300px;
     }
+  }
 
-    .calendar-wrapper {
-        position: relative;
-        width: 100%;
-        height: 0;
-        padding-bottom: 100%; /* Square aspect ratio for mobile */
-        overflow: hidden;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  .carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+  }
+
+  .carousel img.active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .info-box {
+    width: 1000px;
+    max-width: 95vw;
+    background: linear-gradient(135deg, #cde3f7, #a0b8d9);
+    border: 4px solid #5a6f54;
+    border-radius: 25px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 0 30px 6px rgba(90, 111, 84, 0.3);
+    color: #213544;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 768px) {
+    .info-box {
+      font-size: 1.3rem;
+      padding: 2.5rem 2rem;
     }
+  }
 
-    .calendar-iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
+  .info-box h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #264d40;
+    text-shadow: 0 0 5px #a3c4f3bb;
+  }
+
+  @media (min-width: 768px) {
+    .info-box h2 {
+      font-size: 2.5rem;
     }
+  }
 
-    @media (min-width: 768px) {
-        h1 {
-            font-size: 2.5rem;
-            margin: 1.5rem 0 2rem;
-        }
+  .info-box p {
+    margin-bottom: 1.2rem;
+  }
 
-        .calendar-wrapper {
-            padding-bottom: 75%; /* 4:3 aspect ratio for desktop */
-        }
+  .info-box strong {
+    color: #264d40;
+  }
 
-        .page-container {
-            padding: 1.5rem;
-        }
+  .links-container {
+    width: 1000px;
+    max-width: 95vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .links-container {
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
 
-    @media (min-width: 1024px) {
-        .calendar-wrapper {
-            padding-bottom: 60%; /* Wider aspect ratio for larger screens */
-        }
+  .link-box {
+    background: linear-gradient(135deg, #e6f0e8, #cde3f7);
+    border: 4px solid #5a6f54;
+    border-radius: 25px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .link-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 40px 8px rgba(60, 130, 180, 0.5);
+  }
+
+  .link-box h3 {
+    font-size: 1.8rem;
+    margin: 0 0 1rem;
+    color: #264d40;
+    text-shadow: 0 0 5px #a3c4f3bb;
+  }
+
+  .link-box p {
+    font-size: 1rem;
+    color: #213544;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 768px) {
+    .link-box p {
+      font-size: 1.1rem;
     }
+  }
+
+  .link-button {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #d9f0ff;
+    background: linear-gradient(135deg, #3b6e47, #264d40);
+    text-decoration: none;
+    border: 3px solid #264d40;
+    padding: 0.8rem 1.8rem;
+    border-radius: 18px;
+    transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
+    box-shadow: 0 0 12px 3px rgba(60, 130, 180, 0.4);
+  }
+
+  @media (min-width: 768px) {
+    .link-button {
+      font-size: 1.2rem;
+    }
+  }
+
+  .link-button:hover,
+  .link-button:focus {
+    background: linear-gradient(135deg, #4a8456, #2e5d4f);
+    box-shadow: 0 0 20px 6px rgba(163, 196, 243, 0.6);
+    transform: scale(1.05);
+    outline: none;
+  }
+
+  .scroll-hint {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000000ee;
+    text-shadow: none;
+    animation: bounce 2.5s infinite ease-in-out;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 9999;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  .scroll-hint.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .scroll-hint svg {
+    width: 24px;
+    height: 24px;
+    stroke: #000000ee;
+    stroke-width: 3;
+    fill: none;
+    animation: arrowDown 2.5s infinite ease-in-out;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 15px); }
+  }
+
+  @keyframes arrowDown {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.4; transform: translateY(8px); }
+  }
 </style>
 
-<div class="page-container">
-    <h1>Events</h1>
-    <div class="calendar-wrapper">
-        <iframe 
-            class="calendar-iframe"
-            src={calendarUrl}
-            frameborder="0" 
-            scrolling="no"
-            title="Chinese Conversation Table Events Calendar"
-        ></iframe>
+<main>
+  <div class="hero-box" role="banner">
+    <h1>Annual Jay Peak Trip</h1>
+    <p class="subtitle">The Ultimate Winter Break Adventure</p>
+  </div>
+
+  <div class="carousel-section">
+    <div class="carousel" aria-label="Trip photo carousel">
+      {#each tripImages as src, i}
+        <img src={src} alt={`Trip memory ${i + 1}`} class={i === current ? 'active' : ''} />
+      {/each}
     </div>
-</div>
+  </div>
+
+  <section class="info-box" aria-labelledby="trip-info-heading">
+    <h2 id="trip-info-heading">Experience the Best of Vermont Skiing</h2>
+    <p>
+      Every year during the last week of winter break, RIT Alpine Ski Club heads to Jay Peak Resort in Vermont 
+      for our signature annual trip. This is the highlight of our season and an incredible opportunity to ski 
+      some of the best terrain on the East Coast while bonding with fellow club members.
+    </p>
+    <p>
+      <strong>Cost:</strong> The pricing for this trip is split into three parts: 
+      <br> Club dues - $25 for Recreational or $50 for Racing, one or the other.
+      <br> Initial deposit - $100. This secures your spot to give you time to make the next payment.
+      <br> Final deposit - $380, with a tentative deadline of November 30th.
+      <br> Overall: $505, assuming rec dues.
+    </p>
+    <p>
+      <strong>What you get:</strong> The trip package includes multiple days of lift tickets, lodging, 
+      transportation, and access to Jay Peak's legendary glades and terrain. Whether you're racing down 
+      steep chutes or exploring tree runs, Jay Peak offers something for every skill level.
+    </p>
+    <p>
+      <strong>The Nightlife:</strong> After long days on the slopes, we gather for unforgettable evenings 
+      filled with team bonding, games, and memories that last a lifetime. This is where friendships are 
+      forged and stories are made.
+    </p>
+    <p>
+      <strong>Logistics:</strong> 
+    </p>
+    <p>
+      <strong>Why You Should Join:</strong> This trip offers unbeatable value, amazing skiing, and the 
+      chance to be part of something special. From beginners to experts, everyone finds their place on 
+      this adventure. Don't miss out on what many members call the best trip of the year!
+    </p>
+  </section>
+
+  <div class="links-container">
+    <div class="link-box">
+      <h3>Photo Gallery</h3>
+      <p>Check out photos and videos from previous trips to Jay Peak</p>
+      <a
+        class="link-button"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View Gallery
+      </a>
+    </div>
+
+    <div class="link-box">
+      <h3>Trip Slideshow</h3>
+      <p>Relive the best moments from last year's adventure</p>
+      <a
+        class="link-button"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Watch Slideshow
+      </a>
+    </div>
+
+    <div class="link-box">
+      <h3>Gear Rental Info</h3>
+      <p>Find local shops and rental options for your trip equipment</p>
+      <a
+        class="link-button"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Rental Shops
+      </a>
+    </div>
+
+    <div class="link-box">
+      <h3>Jay Peak Resort</h3>
+      <p>Learn more about the mountain, trails, and conditions</p>
+      <a
+        class="link-button"
+        href="https://jaypeakresort.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Visit Website
+      </a>
+    </div>
+  </div>
+
+  {#if $showScrollHint}
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll down</span>
+      <svg viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </div>
+  {/if}
+</main>
