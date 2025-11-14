@@ -377,19 +377,22 @@
       chance to be part of something special. From beginners to experts, everyone finds their place on 
       this adventure. Don't miss out on what many members call the best trip of the year!
     </p>
+    <p>
+        Well, what do you think? Ready to try it out? There are: <b>11</b> spots left as of November 14th. Claim yours now! If you have any questions or concerns, please reach out to us in the <a href="https://discord.gg/HHuBQTKDwQ">discord</a> or to alpine@rit.edu!
+    </p>
   </section>
 
   <div class="links-container">
     <div class="link-box">
-      <h3>Photo Gallery</h3>
-      <p>Check out photos and videos from previous trips to Jay Peak</p>
+      <h3>Jay Peak Resort</h3>
+      <p>Learn more about the mountain, trails, and conditions</p>
       <a
         class="link-button"
-        href="#"
+        href="https://jaypeakresort.com"
         target="_blank"
         rel="noopener noreferrer"
       >
-        View Gallery
+        View Website
       </a>
     </div>
 
@@ -415,16 +418,16 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        Rental Shops
+        Visit Website
       </a>
     </div>
 
     <div class="link-box">
-      <h3>Jay Peak Resort</h3>
-      <p>Learn more about the mountain, trails, and conditions</p>
+      <h3>Dues Link</h3>
+      <p>CampusGroups store for dues payments</p>
       <a
         class="link-button"
-        href="https://jaypeakresort.com"
+        href="https://campusgroups.rit.edu/store?store_id=4036"
         target="_blank"
         rel="noopener noreferrer"
       >
