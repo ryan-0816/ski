@@ -13,6 +13,7 @@
 
   let current = 0;
   let total = tripImages.length;
+  let carouselInterval;
 
   const showScrollHint = writable(true);
 
@@ -27,22 +28,36 @@
     }
   }
 
+  function nextImage() {
+    current = (current + 1) % total;
+  }
+
   onMount(() => {
-    const interval = setInterval(() => {
-      current = (current + 1) % total;
-    }, 4000);
+    // Start carousel
+    carouselInterval = setInterval(nextImage, 4000);
 
+    // Add scroll listener
     window.addEventListener('scroll', handleScroll);
+    
+    // Initial scroll check
+    handleScroll();
 
+    // Cleanup
     return () => {
-      clearInterval(interval);
+      if (carouselInterval) {
+        clearInterval(carouselInterval);
+      }
       window.removeEventListener('scroll', handleScroll);
     };
   });
 </script>
 
+<svelte:head>
+  <title>Annual Jay Peak Trip - RIT Alpine Ski Club</title>
+</svelte:head>
+
 <style>
-  body, html {
+  :global(body), :global(html) {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -133,6 +148,7 @@
     object-fit: cover;
     opacity: 0;
     transition: opacity 1.2s ease-in-out;
+    pointer-events: none;
   }
 
   .carousel img.active {
@@ -316,8 +332,13 @@
 
   <div class="carousel-section">
     <div class="carousel" aria-label="Trip photo carousel">
-      {#each tripImages as src, i}
-        <img src={src} alt={`Trip memory ${i + 1}`} class={i === current ? 'active' : ''} />
+      {#each tripImages as src, i (src)}
+        <img 
+          src={src} 
+          alt="Trip memory {i + 1}" 
+          class:active={i === current}
+          loading={i === 0 ? 'eager' : 'lazy'}
+        />
       {/each}
     </div>
   </div>
@@ -381,7 +402,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        Watch Slideshow
+        View Slideshow
       </a>
     </div>
 
