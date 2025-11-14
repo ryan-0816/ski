@@ -407,11 +407,11 @@
     </div>
 
     <div class="link-box">
-      <h3>Gear Rental Info</h3>
-      <p>Find local shops and rental options for your trip equipment</p>
+      <h3>Store Link</h3>
+      <p>CampusGroups Store for Jay Peak payments</p>
       <a
         class="link-button"
-        href="#"
+        href="https://campusgroups.rit.edu/store?store_id=4564"
         target="_blank"
         rel="noopener noreferrer"
       >
