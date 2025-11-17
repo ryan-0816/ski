@@ -1,20 +1,13 @@
-<svelte:head>
-    <title>Contact Us - RIT Ski Team</title>
-    <meta name="description" content="Get in touch with the RIT Ski Team" />
-</svelte:head>
-
-<svelte:options accessors={true} />
-
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { browser } from '$app/environment';
     
     let name: string = '';
     let email: string = '';
     let message: string = '';
     let status: string = '';
     let isSending: boolean = false;
-    let emailJSReady: boolean = false;
-    let lastSubmissionTime: number = 0;
+    let lastSendTime: number = 0;
     
     // Image error states
     let imageErrors = {
@@ -23,20 +16,16 @@
         discord: false
     };
     
-    // Email configuration - using environment variables for security
-    const PUBLIC_KEY: string = import.meta.env?.VITE_EMAILJS_PUBLIC_KEY || 'Rck1sjqBH0dNeF-aW';
-    const SERVICE_ID: string = import.meta.env?.VITE_EMAILJS_SERVICE_ID || 'service_jkq5b3u';
-    const TEMPLATE_ID: string = import.meta.env?.VITE_EMAILJS_TEMPLATE_ID || 'template_i9ke89m';
-    
-    // TypeScript fix: declare emailjs on window
-    declare global {
-        interface Window {
-            emailjs: any;
-        }
-    }
+    // Email configuration - hardcoded keys
+    const PUBLIC_KEY: string = 'Rck1sjqBH0dNeF-aW';
+    const SERVICE_ID: string = 'service_jkq5b3u';
+    const TEMPLATE_ID: string = 'template_i9ke89m';
+    const COOLDOWN_MS: number = 60000; // 60 seconds between sends
     
     onMount(() => {
-        // Load EmailJS dynamically and wait for it
+        if (!browser) return;
+        
+        // Load EmailJS dynamically
         const script = document.createElement('script');
         script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
         script.async = true;
@@ -44,7 +33,6 @@
         script.onload = () => {
             if (window.emailjs) {
                 window.emailjs.init(PUBLIC_KEY);
-                emailJSReady = true;
                 console.log('EmailJS initialized successfully');
             }
         };
@@ -57,45 +45,29 @@
         document.head.appendChild(script);
         
         return () => {
-            // Cleanup: remove script on component destroy
             if (script.parentNode) {
                 script.parentNode.removeChild(script);
             }
         };
     });
     
-    function validateForm(): boolean {
-        if (!message.trim()) {
-            status = 'Please write your message';
-            return false;
-        }
-        
-        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            status = 'Please enter a valid email address';
-            return false;
-        }
-        
-        return true;
-    }
-    
-    async function sendEmail(event?: Event) {
-        if (event) {
-            event.preventDefault();
-        }
-        
-        if (isSending) return;
-        
-        // Rate limiting - 5 second cooldown
+    const sendEmail = async () => {
         const now = Date.now();
-        if (now - lastSubmissionTime < 5000) {
-            status = 'Please wait a moment before sending another message';
+        
+        // Cooldown check
+        if (now - lastSendTime < COOLDOWN_MS) {
+            status = '⏳ Please wait a few seconds before sending again.';
             return;
         }
         
-        if (!validateForm()) return;
+        // Only message is required
+        if (!message.trim()) {
+            status = 'Please write your message.';
+            return;
+        }
         
-        if (!emailJSReady || !window.emailjs) {
-            status = 'Email service not ready. Please wait a moment and try again.';
+        if (!window.emailjs) {
+            status = 'Email service not ready. Please try again.';
             return;
         }
         
@@ -103,55 +75,35 @@
         status = '📨 Sending...';
         
         try {
-            const templateParams = {
-                from_name: name.trim() || 'Anonymous',
-                from_email: email.trim() || 'no-email-provided',
-                message: message.trim(),
-                reply_to: email.trim() || ''
-            };
-            
-            const response = await window.emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
-            console.log('Email sent successfully:', response);
+            await window.emailjs.send(
+                SERVICE_ID,
+                TEMPLATE_ID,
+                {
+                    from_name: name.trim() || 'Anonymous',
+                    from_email: email.trim() || 'no-email-provided',
+                    message: message.trim()
+                }
+            );
             
             status = '✅ Message sent successfully!';
             name = '';
             email = '';
             message = '';
-            lastSubmissionTime = Date.now();
-            
-            // Clear status after 5 seconds
-            setTimeout(() => {
-                status = '';
-            }, 5000);
+            lastSendTime = now;
             
         } catch (error: any) {
             console.error('Email send error:', error);
-            
-            if (error?.text) {
-                console.error('Error details:', error.text);
-            }
-            
-            if (error?.text?.includes('public key') || error?.text?.includes('Public Key')) {
-                status = '❌ Invalid email configuration. Check public key.';
-            } else if (error?.status === 400) {
-                status = '❌ Invalid email configuration';
-            } else if (error?.status === 401 || error?.status === 403) {
-                status = '❌ Email service unauthorized';
-            } else {
-                status = '❌ Failed to send message. Please try again.';
-            }
+            status = '❌ Failed to send message. Try again.';
         } finally {
             isSending = false;
         }
-    }
-    
-    function handleEnterKey(event: KeyboardEvent): void {
-        if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault();
-            sendEmail();
-        }
-    }
+    };
 </script>
+
+<svelte:head>
+    <title>Contact Us - RIT Ski Team</title>
+    <meta name="description" content="Get in touch with the RIT Ski Team" />
+</svelte:head>
 
 <style>
     :global(body) {
@@ -398,7 +350,7 @@
             <label for="message">Message</label>
         </div>
         
-        <form class="contact-form" on:submit|preventDefault={sendEmail}>
+        <div class="contact-form">
             <input 
                 id="name"
                 type="text" 
@@ -407,28 +359,23 @@
             />
             <input 
                 id="email"
-                type="email" 
+                type="text" 
                 placeholder="Contact (optional)" 
                 bind:value={email} 
             />
             <textarea 
                 id="message"
                 placeholder="Your message..." 
-                bind:value={message} 
-                on:keydown={handleEnterKey}
+                bind:value={message}
             ></textarea>
             
-            <button type="submit" disabled={isSending || !emailJSReady}>
-                {#if isSending}
-                    Sending...
-                {:else if !emailJSReady}
-                    Loading Email Service...
-                {:else}
-                    Send! ➤📤📨⌯⌲
-                {/if}
+            <button on:click={sendEmail} disabled={isSending}>
+                {isSending ? 'Sending...' : 'Send! ➤📤📨⌯⌲'}
             </button>
-        </form>
+        </div>
         
-        <p class="status">{status}</p>
+        {#if status}
+            <p class="status">{status}</p>
+        {/if}
     </div>
 </div>
