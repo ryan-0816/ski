@@ -330,7 +330,7 @@
             </a>
             
             <!-- Discord -->
-            <a href="https://discord.gg/HHuBQTKDwQ"
+            <a href="https://discord.gg/scZUE4Q3sg"
                target="_blank" rel="noopener noreferrer" aria-label="Discord">
                 <img 
                     src={imageErrors.discord ? '/fallback-social.jpg' : '/discordlogo.jpg'} 
