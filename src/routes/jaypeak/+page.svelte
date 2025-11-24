@@ -379,7 +379,7 @@
       this adventure. Don't miss out on what many members call the best trip of the year!
     </p>
     <p>
-        Well, what do you think? Ready to try it out? There are: <b>8</b> spots left as of November 23rd. Going quick, so claim yours now! If you have any questions or concerns, please reach out to us in the <a href="https://discord.gg/scZUE4Q3sg">discord</a> or at alpine@rit.edu!
+        Well, what do you think? Ready to try it out? There are: <b>6</b> spots left as of November 24th. Going quick, so claim yours now! If you have any questions or concerns, please reach out to us in the <a href="https://discord.gg/scZUE4Q3sg">discord</a> or at alpine@rit.edu!
     </p>
   </section>
 
