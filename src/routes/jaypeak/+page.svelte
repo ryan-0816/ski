@@ -371,7 +371,7 @@
       <br>Transportation: We do our best to coordinate carpooling to the mountain. If you are in the New England area, there are good chances someone will be able to pick you up. If you are from farther, many people will meet at RIT a week early and several cars will head to the mountain from there. Bus transportation from the cabins to the mountain is included. 
       <br>Lodging: We have 5 cabins with 6 people each. We will make rooming assignments.
       <br>Food: We expect everyone to contribute equally, whether that is in cooking, buying food, or cleaning up. 
-      <br>Timeline: We want everyone to have made their payments by November 30th, as we will be hosting a details meeting on December 1st to make plans. We will be staying in the cabins from the nights of January 4th through 8th, and skiing from the 5th through 9th. Optional day passes can be purchased separately on the 4th if you arrive early.
+      <br>Timeline: We want everyone to have made their payments by November 30th, as we will be hosting a details meeting on December 1st to make plans. However, tickets will be available for as long as there are still spots left. We will be staying in the cabins from the nights of January 4th through 8th, and skiing from the 5th through 9th. Optional day passes can be purchased separately on the 4th if you arrive early.
     </p>
     <p>
       <strong>Why You Should Join:</strong> This trip offers unbeatable value, amazing skiing, and the 
@@ -379,7 +379,7 @@
       this adventure. Don't miss out on what many members call the best trip of the year!
     </p>
     <p>
-        Well, what do you think? Ready to try it out? There are: <b>6</b> spots left as of November 24th. Going quick, so claim yours now! If you have any questions or concerns, please reach out to us in the <a href="https://discord.gg/scZUE4Q3sg">discord</a> or at alpine@rit.edu!
+        Well, what do you think? Ready to try it out? There are: <b>3</b> spots left as of November 30th. Going quick, so claim yours now! If you have any questions or concerns, please reach out to us in the <a href="https://discord.gg/scZUE4Q3sg">discord</a> or at alpine@rit.edu!
     </p>
   </section>
 
