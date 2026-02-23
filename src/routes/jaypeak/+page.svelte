@@ -3,17 +3,38 @@
   import { writable } from 'svelte/store';
 
   let tripImages = [
+    "/jay1.jpg",
+    "/jay2.jpg",
+    "/jay3.jpg",
+    "/jay4.jpg",
+    "/jay5.jpg",
+    "/jay6.jpg",
+    "/jay7.jpg",
+    "/jay8.jpg",
+    "/jay9.jpg",
+    "/jay10.jpg",
+    "/jay11.jpg",
+    "/jay12.jpg",
+    "/jay13.jpg",
+    "/jay14.jpg",
+    "/jay15.jpg",
+    "/jay16.jpg",
+    "/jay17.jpg",
+    "/jay18.jpg",
+    "/jay19.jpg",
+    "/jay21.jpg"
+  ]
+  let tripImages2 = [
     "/photo3.jpg",
     "/photo6.JPEG",
     "/photo1.JPG",
     "/photo2.jpg",
     "/photo4.jpg",
     "/photo5.jpg"
-  ];
+  ]
 
   let current = 0;
-  let total = tripImages.length;
-  let carouselInterval;
+  let carouselInterval = 0;
 
   const showScrollHint = writable(true);
 
@@ -29,24 +50,16 @@
   }
 
   function nextImage() {
-    current = (current + 1) % total;
+    current = (current + 1) % tripImages2.length;
   }
 
   onMount(() => {
-    // Start carousel
     carouselInterval = setInterval(nextImage, 4000);
-
-    // Add scroll listener
     window.addEventListener('scroll', handleScroll);
-    
-    // Initial scroll check
     handleScroll();
 
-    // Cleanup
     return () => {
-      if (carouselInterval) {
-        clearInterval(carouselInterval);
-      }
+      if (carouselInterval) clearInterval(carouselInterval);
       window.removeEventListener('scroll', handleScroll);
     };
   });
@@ -200,85 +213,101 @@
     color: #264d40;
   }
 
-  .links-container {
+  /* ── Marquee Gallery ── */
+  .marquee-wrapper {
     width: 1000px;
     max-width: 95vw;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  @media (min-width: 768px) {
-    .links-container {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .link-box {
-    background: linear-gradient(135deg, #e6f0e8, #cde3f7);
+    background: linear-gradient(135deg, #cde3f7, #a0b8d9);
     border: 4px solid #5a6f54;
     border-radius: 25px;
-    padding: 2rem 1.5rem;
-    box-shadow: 0 0 30px 6px rgba(60, 130, 180, 0.3);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1.5rem 0;
+    box-shadow: 0 0 30px 6px rgba(90, 111, 84, 0.3);
+    margin-bottom: 2rem;
     box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
   }
 
-  .link-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 40px 8px rgba(60, 130, 180, 0.5);
+  .marquee-wrapper::before,
+  .marquee-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
   }
 
-  .link-box h3 {
-    font-size: 1.8rem;
-    margin: 0 0 1rem;
-    color: #264d40;
-    text-shadow: 0 0 5px #a3c4f3bb;
+  .marquee-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, #cde3f7, transparent);
   }
 
-  .link-box p {
-    font-size: 1rem;
-    color: #213544;
-    margin-bottom: 1.5rem;
-    line-height: 1.5;
+  .marquee-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, #a0b8d9, transparent);
   }
 
-  @media (min-width: 768px) {
-    .link-box p {
-      font-size: 1.1rem;
+  .marquee-track {
+    display: flex;
+    gap: 1.2rem;
+    width: max-content;
+    animation: marquee-scroll 40s linear infinite;
+    padding: 0.5rem 1.2rem;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .marquee-item {
+    flex-shrink: 0;
+    width: 320px;
+    height: 220px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid #5a6f54;
+    box-shadow: 0 0 20px 4px rgba(60, 130, 180, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .marquee-item:hover {
+    transform: scale(1.04) translateY(-4px);
+    box-shadow: 0 0 32px 8px rgba(60, 130, 180, 0.45);
+  }
+
+  .marquee-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .marquee-item:hover img {
+    transform: scale(1.07);
+  }
+
+  @media (max-width: 768px) {
+    .marquee-item {
+      width: 220px;
+      height: 155px;
+    }
+
+    .marquee-wrapper::before,
+    .marquee-wrapper::after {
+      width: 40px;
     }
   }
 
-  .link-button {
-    display: inline-block;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #d9f0ff;
-    background: linear-gradient(135deg, #3b6e47, #264d40);
-    text-decoration: none;
-    border: 3px solid #264d40;
-    padding: 0.8rem 1.8rem;
-    border-radius: 18px;
-    transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
-    box-shadow: 0 0 12px 3px rgba(60, 130, 180, 0.4);
-  }
-
-  @media (min-width: 768px) {
-    .link-button {
-      font-size: 1.2rem;
-    }
-  }
-
-  .link-button:hover,
-  .link-button:focus {
-    background: linear-gradient(135deg, #4a8456, #2e5d4f);
-    box-shadow: 0 0 20px 6px rgba(163, 196, 243, 0.6);
-    transform: scale(1.05);
-    outline: none;
-  }
-
+  /* ── Scroll hint ── */
   .scroll-hint {
     position: fixed;
     bottom: 20px;
@@ -332,7 +361,7 @@
 
   <div class="carousel-section">
     <div class="carousel" aria-label="Trip photo carousel">
-      {#each tripImages as src, i (src)}
+      {#each tripImages2 as src, i (src)}
         <img 
           src={src} 
           alt="Trip memory {i + 1}" 
@@ -346,94 +375,29 @@
   <section class="info-box" aria-labelledby="trip-info-heading">
     <h2 id="trip-info-heading">Experience the Best of Vermont Skiing</h2>
     <p>
-      Every year during the last week of winter break, RIT Alpine Ski Club heads to Jay Peak Resort in Vermont 
+      Every year during the last week of winter break, RIT Alpine Ski Club brinds ~30 people to Jay Peak Resort in Vermont 
       for our signature annual trip. This is the highlight of our season and an incredible opportunity to ski 
-      some of the best terrain on the East Coast while bonding with fellow club members.
-    </p>
-    <p>
-      <strong>Cost:</strong> The pricing for this trip is split into three parts: 
-      <br> Club dues - $25 for Recreational or $50 for Racing, one or the other.
-      <br> Initial deposit - $100. This secures your spot to give you time to make the next payment.
-      <br> Final deposit - $380, with a tentative deadline of November 30th.
-      <br> Overall: $505, assuming rec dues.
-    </p>
-    <p>
-      <strong>What you get:</strong> The trip package includes five full days of lift tickets, lodging, and access to Jay Peak's legendary glades and terrain. Whether you're racing down 
-      steep chutes or exploring tree runs, Jay Peak offers something for every skill level.
-    </p>
-    <p>
-      <strong>The Nightlife:</strong> After long days on the slopes, we gather for unforgettable evenings 
-      filled with team bonding, games, and memories that last a lifetime. This is where friendships are 
-      forged and stories are made.
-    </p>
-    <p>
-      <strong>Logistics:</strong> 
-      <br>Transportation: We do our best to coordinate carpooling to the mountain. If you are in the New England area, there are good chances someone will be able to pick you up. If you are from farther, many people will meet at RIT a week early and several cars will head to the mountain from there. Bus transportation from the cabins to the mountain is included. 
-      <br>Lodging: We have 5 cabins with 6 people each. We will make rooming assignments.
-      <br>Food: We expect everyone to contribute equally, whether that is in cooking, buying food, or cleaning up. 
-      <br>Timeline: We want everyone to have made their payments by November 30th, as we will be hosting a details meeting on December 1st to make plans. However, tickets will be available for as long as there are still spots left. We will be staying in the cabins from the nights of January 4th through 8th, and skiing from the 5th through 9th. Optional day passes can be purchased separately on the 4th if you arrive early.
-    </p>
-    <p>
-      <strong>Why You Should Join:</strong> This trip offers unbeatable value, amazing skiing, and the 
-      chance to be part of something special. From beginners to experts, everyone finds their place on 
-      this adventure. Don't miss out on what many members call the best trip of the year!
-    </p>
-    <p>
-        Well, what do you think? Ready to try it out? There are: <b>3</b> spots left as of November 30th. Going quick, so claim yours now! If you have any questions or concerns, please reach out to us in the <a href="https://discord.gg/scZUE4Q3sg">discord</a> or at alpine@rit.edu!
+      some of the best terrain on the East Coast while bonding with fellow club members. We will introduce the trip at the start of the fall 2026 semester, with several
+      interest meetings and logistics planning to follow. Tickets are ~$500, and include 5 full day passes and 5 
+      nights at mountainside cabins. All photos below were 
+      taken from the 2026 trip. Please reach out if you're interested in joining us next year!
     </p>
   </section>
 
-  <div class="links-container">
-    <div class="link-box">
-      <h3>Jay Peak Resort</h3>
-      <p>Learn more about the mountain, trails, and conditions</p>
-      <a
-        class="link-button"
-        href="https://jaypeakresort.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View Website
-      </a>
-    </div>
-
-    <div class="link-box">
-      <h3>Slideshow</h3>
-      <p>Presentation with a few of the finer details</p>
-      <a
-        class="link-button"
-        href="https://docs.google.com/presentation/d/19RK-Tfv78vYm9NCPSv2cIm8J_HPMiijRWXeWv21kW6g/edit?usp=sharing"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View Slideshow
-      </a>
-    </div>
-
-    <div class="link-box">
-      <h3>Store Link</h3>
-      <p>CampusGroups Store for Jay Peak payments</p>
-      <a
-        class="link-button"
-        href="https://campusgroups.rit.edu/store?store_id=4564"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Visit Website
-      </a>
-    </div>
-
-    <div class="link-box">
-      <h3>Dues Link</h3>
-      <p>CampusGroups store for dues payments</p>
-      <a
-        class="link-button"
-        href="https://campusgroups.rit.edu/store?store_id=4036"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Visit Website
-      </a>
+  <!-- Marquee photo gallery -->
+  <div class="marquee-wrapper" aria-label="Scrolling trip photo gallery">
+    <div class="marquee-track">
+      {#each tripImages as src, i}
+        <div class="marquee-item">
+          <img src={src} alt="Jay Peak trip photo {i + 1}" loading="lazy" />
+        </div>
+      {/each}
+      <!-- Duplicate set for seamless looping -->
+      {#each tripImages as src, i}
+        <div class="marquee-item" aria-hidden="true">
+          <img src={src} alt="" loading="lazy" />
+        </div>
+      {/each}
     </div>
   </div>
 
