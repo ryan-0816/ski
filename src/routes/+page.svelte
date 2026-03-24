@@ -466,7 +466,9 @@
         last week of winter break. This is an insane package consisting of several days of amazing skiing and very fun nights for an 
         excellent deal. If you enjoy or would like to try skiing, please reach out and see what we 
         can set up! Any level of skiing is welcomed!
-        \n\nWebsite last updated: 3/24/2026
+        <br><br>
+        
+        Website last updated: 3/24/2026
       </p>
     </section>
   </div>
