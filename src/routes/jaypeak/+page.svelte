@@ -375,7 +375,7 @@
   <section class="info-box" aria-labelledby="trip-info-heading">
     <h2 id="trip-info-heading">Experience the Best of Vermont Skiing</h2>
     <p>
-      Every year during the last week of winter break, RIT Alpine Ski Club brinds ~30 people to Jay Peak Resort in Vermont 
+      Every year during the last week of winter break, RIT Alpine Ski Club brings ~30 people to Jay Peak Resort in Vermont 
       for our signature annual trip. This is the highlight of our season and an incredible opportunity to ski 
       some of the best terrain on the East Coast while bonding with fellow club members. We will introduce the trip at the start of the fall 2026 semester, with several
       interest meetings and logistics planning to follow. Tickets are ~$500, and include 5 full day passes and 5 
