@@ -23,12 +23,13 @@
 
   // E-Board members data
   const eboardMembers = [
-    { position: "President", name: "Emerson Ostrander", email: "eeo7010@rit.edu" },
+    { position: "President", name: "Ryan Tagen", email: "rst4035@rit.edu" },
     { position: "Vice President", name: "Jack Smith", email: "jas3139@rit.edu" },
-    { position: "Treasurer", name: "Emma Duprey", email: "ead8357@rit.edu" },
-    { position: "Treasurer", name: "Finn Sheridan-Crane", email: "fms7124@rit.edu" },
-    { position: "Secretary", name: "Ryan Tagen", email: "rst4035@rit.edu" },
-    { position: "Public Relations", name: "Julia Kress", email: "jek5095@rit.edu" }
+    { position: "Treasurer", name: "Logan Larocque", email: "lml3687@rit.edu" },
+    { position: "Treasurer", name: "Cameron Stonerock", email: "cms5915@rit.edu" },
+    { position: "Secretary", name: "Emma Pribanich", email: "emp6630@rit.edu" },
+    { position: "Public Relations", name: "Emma Duprey", email: "ead8357@rit.edu" },
+    { position: "Recreational Representative", name: "Milana Schwartz", email: "mhs4435@rit.edu" }
   ];
 
   function handleScroll() {
@@ -460,15 +461,15 @@
       <p>
         RIT Alpine Ski Club! Operating during spring semester, we have two halves: recreation and race. Recreation hosts 
         trips locally, such as to Swain Resort or Bristol Mountain, on a weekly basis. Joining the team gets you access
-        to those group discounts, carpool/transportation, and other things. The race team competes against nearby colleges
+        to those group discounts, carpool/transportation, and great people to ski with. The race team competes against nearby colleges
         in both slalom and giant slalom, frequenting resorts such as Labrador Mountain, Greek Peak, Bristol Resort, and West 
-        Mountain. They also train two days a week at Swain Resort. The ski team also hosts an annual trip to Jay Peak on the 
+        Mountain. They also train two days a week at Swain Resort. We also host an annual trip to Jay Peak on the 
         last week of winter break. This is an insane package consisting of several days of amazing skiing and very fun nights for an 
         excellent deal. If you enjoy or would like to try skiing, please reach out and see what we 
         can set up! Any level of skiing is welcomed!
         <br><br>
         
-        Website last updated: 3/24/2026
+        Website last updated: 6/19/2026
       </p>
     </section>
   </div>

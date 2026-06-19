@@ -1,6 +1,6 @@
 <script lang="ts">
-  // List your forms here with display name and file URL
-  const forms = [
+  // List your docs here with display name and file URL
+  const docs = [
     { name: "USCSA Registration Instructions", url: "/USCSA Registration Instructions.pdf" },
     { name: "Academic Eligibility", url: "/25-26_Individual_Academic_Eligibility_Release_Form.pdf"},
     { name: "Form 3", url: "/form3.pdf" },
@@ -142,27 +142,27 @@
 </style>
 
 <main>
-  <h1>Forms</h1>
+  <h1>Docs</h1>
 
   <ul>
-    {#each forms as form}
+    {#each docs as doc}
       <li>
-        <span class="form-name">{form.name}</span>
+        <span class="form-name">{doc.name}</span>
         <div class="buttons">
           <a
             class="button-link"
-            href={form.url}
+            href={doc.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Open ${form.name} in a new tab`}
+            aria-label={`Open ${doc.name} in a new tab`}
           >
             Open
           </a>
           <a
             class="button-link"
-            href={form.url}
+            href={doc.url}
             download
-            aria-label={`Download ${form.name}`}
+            aria-label={`Download ${doc.name}`}
           >
             Download
           </a>
