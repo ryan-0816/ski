@@ -32,7 +32,7 @@
     { position: "Recreational Representative", name: "Milana Schwartz", email: "mhs4435@rit.edu" }
   ];
 
-  function handleScroll() {
+  function handleScroll() { 
     const scrollPosition = window.scrollY + window.innerHeight;
     const fullHeight = document.documentElement.scrollHeight;
 
