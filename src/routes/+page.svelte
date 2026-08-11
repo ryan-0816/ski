@@ -71,7 +71,7 @@
   });
 
   let qrCodeSrc = "/qr-code.png";
-  const password = "alpine25";
+  const password = "alpine27";
 </script>
 
 <style>
@@ -500,7 +500,7 @@
     </a>
 
     <div class="password-container">
-      <span><strong>Password:</strong> alpine25</span>
+      <span><strong>Password:</strong> alpine27</span>
       <!-- svelte-ignore a11y_mouse_events_have_key_events -->
       <button
         on:click={copyPassword}
