@@ -459,6 +459,8 @@
     <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
     <section class="about-us" aria-labelledby="about-heading" tabindex="0">
       <p>
+        Come join our introductory meeting! Thursday, September 4th from 7-8PM in LBR-A201. We'll be going over the information below, 
+        plus more of our plans for the semester! Show up for a chance to win a lift ticket giveaway!
         RIT Alpine Ski Club! Operating during spring semester, we have two halves: recreation and race. Recreation hosts 
         trips locally, such as to Swain Resort or Bristol Mountain, on a weekly basis. Joining the team gets you access
         to those group discounts, carpool/transportation, and great people to ski with. The race team competes against nearby colleges
@@ -469,7 +471,7 @@
         can set up! Any level of skiing is welcomed!
         <br><br>
         
-        Website last updated: 6/19/2026
+        Website last updated: 8/24/2026
       </p>
     </section>
   </div>
