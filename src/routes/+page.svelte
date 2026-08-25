@@ -459,7 +459,7 @@
     <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
     <section class="about-us" aria-labelledby="about-heading" tabindex="0">
       <p>
-        Come join our introductory meeting! Thursday, September 4th from 7-8PM in LBR-A201. We'll be going over the information below, 
+        Come join our introductory meeting! Thursday, September 3rd from 7-8PM in LBR-A201. We'll be going over the information below, 
         plus more of our plans for the semester! Show up for a chance to win a lift ticket giveaway!
         <br><br>
         
