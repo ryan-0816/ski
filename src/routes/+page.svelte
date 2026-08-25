@@ -461,6 +461,8 @@
       <p>
         Come join our introductory meeting! Thursday, September 3rd from 7-8PM in LBR-A201. We'll be going over the information below, 
         plus more of our plans for the semester! Show up for a chance to win a lift ticket giveaway!
+        <br>
+        Join the discord! <a href="https://discord.gg/Rn8pWctPNv" target="_blank" rel="noopener noreferrer">https://discord.gg/Rn8pWctPNv </a>
         <br><br>
         
         RIT Alpine Ski Club! Operating during spring semester, we have two halves: recreation and race. Recreation hosts 
